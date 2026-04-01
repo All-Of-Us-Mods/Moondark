@@ -1,0 +1,52 @@
+services:
+  postgres:
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_USER: moondark
+      POSTGRES_PASSWORD: moondark
+      POSTGRES_DB: moondark
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+
+  api:
+    build:
+      context: .
+      dockerfile: apps/api/Dockerfile
+    ports:
+      - "3001:3001"
+    environment:
+      DATABASE_URL: postgresql://moondark:moondark@postgres:5432/moondark
+      REDIS_URL: redis://redis:6379
+      SIGNALING_URL: http://signaling:3002
+    depends_on:
+      - postgres
+      - redis
+      - signaling
+
+  signaling:
+    build:
+      context: .
+      dockerfile: packages/signaling/Dockerfile
+    ports:
+      - "3002:3002"
+
+  dashboard:
+    build:
+      context: .
+      dockerfile: apps/dashboard/Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      PUBLIC_API_BASE: http://api:3001
+    depends_on:
+      - api
+
+volumes:
+  postgres_data:

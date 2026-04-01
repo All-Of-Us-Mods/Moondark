@@ -1,0 +1,21 @@
+{
+  "name": "@moondark/api",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "bun run --watch src/index.ts",
+    "build": "bun build src/index.ts --target=bun --outdir=dist",
+    "start": "bun run dist/index.js",
+    "check": "vp check"
+  },
+  "dependencies": {
+    "elysia": "1.4.28",
+    "@sinclair/typebox": "^0.34.0",
+    "@moondark/types": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/bun": "latest",
+    "typescript": "^6.0.2"
+  }
+}

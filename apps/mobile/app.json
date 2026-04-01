@@ -1,0 +1,28 @@
+{
+  "expo": {
+    "name": "Moondark",
+    "slug": "moondark",
+    "version": "0.0.0",
+    "orientation": "landscape",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "dark",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#0a0a0f"
+    },
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.moondark.app"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "backgroundColor": "#0a0a0f"
+      },
+      "package": "com.moondark.app"
+    },
+    "web": {
+      "bundler": "metro"
+    }
+  }
+}
